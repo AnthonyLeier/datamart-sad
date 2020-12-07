@@ -29,17 +29,17 @@ class DimCliente {
                 while ($linhaCliente = $resultComercial->fetch_assoc()) { //Atibui à variável cada linha até o último
                     $cliente = new Cliente();
                     $cliente->setCliente($linhaCliente['cpf'], $linhaCliente['nome'], $linhaCliente['sexo'], $linhaCliente['idade'], $linhaCliente['rua'], $linhaCliente['bairro'], $linhaCliente['cidade'], $linhaCliente['uf']);
-                    $slqInsertDim = $connDimensao->prepare("insert into dim_cliente
+                    $sqlInsertDim = $connDimensao->prepare("insert into dim_cliente
                                                           (cpf, nome, sexo, idade, rua, bairro, cidade, uf, data_ini)
                                                           values
                                                           (?,?,?,?,?,?,?,?,?)");
-                    $slqInsertDim->bind_param("sssisssss", $cliente->cpf, $cliente->nome, $cliente->sexo, $cliente->idade, $cliente->rua, $cliente->bairro, $cliente->cidade, $cliente->uf, $dataAtual);
-                    $slqInsertDim->execute();
+                    $sqlInsertDim->bind_param("sssisssss", $cliente->cpf, $cliente->nome, $cliente->sexo, $cliente->idade, $cliente->rua, $cliente->bairro, $cliente->cidade, $cliente->uf, $dataAtual);
+                    $sqlInsertDim->execute();
                     $sumario->setQuantidadeInclusoes();
                 }
                 $sqlComercial->close();
                 $sqlDim->close();
-                $slqInsertDim->close();
+                $sqlInsertDim->close();
                 $connComercial->close();
                 $connDimensao->close();
             }

@@ -49,6 +49,16 @@ CREATE TABLE IF NOT EXISTS `dim_data` (
   PRIMARY KEY (`SK_data`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- Copiando estrutura para tabela dm_comercial.dim_produto
+CREATE TABLE IF NOT EXISTS `dim_produto` (
+  `SK_produto` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  `descricao` VARCHAR(200) NOT NULL,
+  `unidade` CHAR(3) NOT NULL,
+  `preco` DOUBLE NOT NULL,
+  PRIMARY KEY (`SK_produto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela dm_comercial.fato_financeiro
