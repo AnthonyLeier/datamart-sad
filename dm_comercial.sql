@@ -74,6 +74,37 @@ CREATE TABLE IF NOT EXISTS `fato_financeiro` (
   CONSTRAINT `SK_dataFin` FOREIGN KEY (`SK_data`) REFERENCES `dim_data` (`SK_data`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- -----------------------------------------------------
+-- Table `dm_comercial`.`fato_venda`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dm_comercial`.`fato_venda` (
+  `cod_fato_venda` INT NOT NULL AUTO_INCREMENT,
+  `SK_cliente` INT NULL,
+  `SK_data` INT NULL,
+  `SK_produto` INT NULL,
+  `valor_venda` DECIMAL(9,2) NULL,
+  `quantidade_venda` DECIMAL(9,2) NULL,
+  PRIMARY KEY (`cod_fato_venda`),
+  INDEX `Cliente_idx` (`SK_cliente` ASC) ,
+  INDEX `Data_idx` (`SK_data` ASC),
+  INDEX `Produto_idx` (`SK_produto` ASC),
+  CONSTRAINT `Cliente`
+    FOREIGN KEY (`SK_cliente`)
+    REFERENCES `dm_comercial`.`dim_cliente` (`SK_cliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Data`
+    FOREIGN KEY (`SK_data`)
+    REFERENCES `dm_comercial`.`dim_data` (`SK_data`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Produto`
+    FOREIGN KEY (`SK_produto`)
+    REFERENCES `dm_comercial`.`dim_produto` (`SK_produto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
 -- Exportação de dados foi desmarcado.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
